@@ -54,7 +54,9 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
 import java.nio.charset.StandardCharsets;
+import java.util.Calendar;
 import java.util.Locale;
 
 @Mod(modid = SkyclientCosmetics.MOD_ID, name = SkyclientCosmetics.MOD_NAME, version = SkyclientCosmetics.MOD_VERSION, clientSideOnly = true, acceptedMinecraftVersions = "[1.8.9]")
@@ -80,6 +82,9 @@ public class SkyclientCosmetics {
     public static boolean isEssential;
     public static boolean isReplayMod = false;
     //private static boolean hasFailed;
+
+    public static boolean aprilTroll = false;
+    public static long aprilTrollUntil = -1L;
 
     @Mod.EventHandler
     public void onPreInit(FMLPreInitializationEvent event) {
@@ -133,6 +138,20 @@ public class SkyclientCosmetics {
         MinecraftForge.EVENT_BUS.register(RPC.INSTANCE);
 
         ProgressManager.pop(progress);
+
+        if ((Calendar.getInstance().get(Calendar.MONTH) == Calendar.APRIL && Calendar.getInstance().get(Calendar.DAY_OF_MONTH) == 1) || (Calendar.getInstance().get(Calendar.MONTH) == Calendar.MARCH && Calendar.getInstance().get(Calendar.DAY_OF_MONTH) == 31)) {
+            aprilTroll = true;
+            File file = new File(Files.sccFolder, "aprilTroll-" + Calendar.getInstance().get(Calendar.YEAR) + (Calendar.getInstance().get(Calendar.MONTH) + 1) + Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + ".txt");
+            if (file.exists()) {
+                return;
+            }
+            aprilTrollUntil = System.currentTimeMillis() + 900000L; // 15 mins.
+            try {
+                file.createNewFile();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Mod.EventHandler

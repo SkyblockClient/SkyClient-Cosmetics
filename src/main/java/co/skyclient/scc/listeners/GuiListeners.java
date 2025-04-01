@@ -17,6 +17,8 @@
 
 package co.skyclient.scc.listeners;
 
+import cc.polyfrost.oneconfig.libs.universal.UDesktop;
+import cc.polyfrost.oneconfig.renderer.NanoVGHelper;
 import co.skyclient.scc.SkyclientCosmetics;
 import co.skyclient.scc.config.Settings;
 import co.skyclient.scc.gui.SkyClientMainMenu;
@@ -24,9 +26,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiIngameMenu;
 import net.minecraft.client.gui.GuiMainMenu;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+
+import java.net.URI;
 
 public class GuiListeners {
 
@@ -52,6 +58,28 @@ public class GuiListeners {
             if (Minecraft.getMinecraft().currentScreen instanceof GuiMainMenu && !(Minecraft.getMinecraft().currentScreen instanceof SkyClientMainMenu)) {
                 Minecraft.getMinecraft().displayGuiScreen(new SkyClientMainMenu());
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void onGuiDraw(GuiScreenEvent.BackgroundDrawnEvent event) {
+        if (!SkyclientCosmetics.aprilTroll) return;
+        if (event.gui instanceof GuiContainer) {
+            handleAprilFoolsDraw(event.gui);
+        }
+    }
+
+    public static void handleAprilFoolsDraw(GuiScreen gui) {
+        NanoVGHelper.INSTANCE.setupAndDraw(true, (vg) -> NanoVGHelper.INSTANCE.drawImage(vg, "/SKYCLIENTCOSMETICS AD.png", gui.width - (821 * 3f / 4f / 4f), 0, 821 * 3f / 4f / 4f, 1080 * 3f / 4f / 4f, GuiListeners.class));
+    }
+
+    public static void handleAprilFoolsMouse(GuiScreen gui, int mouseX, int mouseY, int mouseButton) {
+        if (mouseButton == 0 &&
+                mouseX >= gui.width - (821 * 3f / 4f / 4f) &&
+                mouseX <= gui.width
+                && mouseY >= 0 &&
+                mouseY <= (1080 * 3f / 4f / 4f)) {
+            UDesktop.browse(URI.create("https://www.patreon.com/Polyfrost/membership"));
         }
     }
 }

@@ -4,6 +4,7 @@ import cc.polyfrost.oneconfig.libs.universal.ChatColor;
 import cc.polyfrost.oneconfig.libs.universal.USound;
 import cc.polyfrost.oneconfig.utils.gui.GuiUtils;
 import co.skyclient.scc.hooks.GuiWinGameHook;
+import co.skyclient.scc.listeners.GuiListeners;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.multiplayer.ServerData;
@@ -257,6 +258,8 @@ public class SkyClientMainMenu extends GuiMainMenu {
         glPopMatrix();
         GlStateManager.disableBlend();
 
+        GuiListeners.handleAprilFoolsDraw(this);
+
         int x = this.width - this.fontRendererObj.getStringWidth(MOJANG_COPYRIGHT_TEXT) - 2;
         int y = this.height - 10;
         boolean isMouseOver = (mouseX > x && mouseX < width - 1) && (mouseY > y && mouseY < height);
@@ -282,6 +285,7 @@ public class SkyClientMainMenu extends GuiMainMenu {
 
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) {
+        GuiListeners.handleAprilFoolsMouse(this, mouseX, mouseY, mouseButton);
         if (mouseButton == 0) {
             //noinspection DuplicatedCode
             int x = this.width - this.fontRendererObj.getStringWidth(MOJANG_COPYRIGHT_TEXT) - 2;

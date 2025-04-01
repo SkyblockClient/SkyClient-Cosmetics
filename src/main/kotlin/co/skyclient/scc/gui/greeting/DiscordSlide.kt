@@ -9,7 +9,7 @@ import cc.polyfrost.oneconfig.libs.universal.UDesktop
 import co.skyclient.scc.gui.greeting.components.onLeftClick
 import java.net.URI
 
-class DiscordSlide : GreetingSlide<ImportSlide>(ImportSlide::class.java) {
+class DiscordSlide : GreetingSlide<TagSlide>(TagSlide::class.java) {
     val text by UIWrappedText("""
         You can get support via our ${ChatColor.BOLD}Discord Server${ChatColor.RESET} by going to ${ChatColor.BLUE}${ChatColor.BOLD}https://inv.wtf/skyclient${ChatColor.RESET} or clicking this text.
     """.trimIndent(), centered = true) constrain {

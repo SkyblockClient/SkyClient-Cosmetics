@@ -7,10 +7,12 @@
   "refmap": "mixins.scc.refmap.json",
   "client": [
     "EntityPlayerMixin",
+    "GuiContainerMixin",
     "GuiPlayerTabOverlayMixin",
     "GuiWinGameMixin",
     "MinecraftMixin",
     "NetworkPlayerInfoMixin",
+    "RendererLivingEntityMixin_AprilFools",
     "ServerListAccessor",
     "SkytilsMixin",
     "TextureUtilMixin",

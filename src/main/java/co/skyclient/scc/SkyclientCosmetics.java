@@ -82,8 +82,6 @@ public class SkyclientCosmetics {
     public static boolean isEssential;
     public static boolean isReplayMod = false;
     //private static boolean hasFailed;
-
-    public static boolean aprilTroll = false;
     public static long aprilTrollUntil = -1L;
 
     @Mod.EventHandler
@@ -140,7 +138,6 @@ public class SkyclientCosmetics {
         ProgressManager.pop(progress);
 
         if ((Calendar.getInstance().get(Calendar.MONTH) == Calendar.APRIL && Calendar.getInstance().get(Calendar.DAY_OF_MONTH) == 1) || (Calendar.getInstance().get(Calendar.MONTH) == Calendar.MARCH && Calendar.getInstance().get(Calendar.DAY_OF_MONTH) == 31)) {
-            aprilTroll = true;
             File file = new File(Files.sccFolder, "aprilTroll-" + Calendar.getInstance().get(Calendar.YEAR) + (Calendar.getInstance().get(Calendar.MONTH) + 1) + Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + ".txt");
             if (file.exists()) {
                 return;

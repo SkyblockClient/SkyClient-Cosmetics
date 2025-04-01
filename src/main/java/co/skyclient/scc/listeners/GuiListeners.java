@@ -63,17 +63,18 @@ public class GuiListeners {
 
     @SubscribeEvent
     public void onGuiDraw(GuiScreenEvent.BackgroundDrawnEvent event) {
-        if (!SkyclientCosmetics.aprilTroll) return;
         if (event.gui instanceof GuiContainer) {
             handleAprilFoolsDraw(event.gui);
         }
     }
 
     public static void handleAprilFoolsDraw(GuiScreen gui) {
+        if (SkyclientCosmetics.aprilTrollUntil == 0 || System.currentTimeMillis() > SkyclientCosmetics.aprilTrollUntil) return;
         NanoVGHelper.INSTANCE.setupAndDraw(true, (vg) -> NanoVGHelper.INSTANCE.drawImage(vg, "/SKYCLIENTCOSMETICS AD.png", gui.width - (821 * 3f / 4f / 4f), 0, 821 * 3f / 4f / 4f, 1080 * 3f / 4f / 4f, GuiListeners.class));
     }
 
     public static void handleAprilFoolsMouse(GuiScreen gui, int mouseX, int mouseY, int mouseButton) {
+        if (SkyclientCosmetics.aprilTrollUntil == 0 || System.currentTimeMillis() > SkyclientCosmetics.aprilTrollUntil) return;
         if (mouseButton == 0 &&
                 mouseX >= gui.width - (821 * 3f / 4f / 4f) &&
                 mouseX <= gui.width
